@@ -1,35 +1,72 @@
-/* App.css - Versión mejorada para responsividad */
+/* App.css - Versión con nueva paleta de colores */
+:root {
+  --primary: #00FFD0;         /* Cian brillante */
+  --secondary: #FCF4EE;       /* Blanco hueso */
+  --tertiary: #6D7275;        /* Gris medio */
+  --dark: #04080F;            /* Azul oscuro casi negro */
+  --accent: #5e8aff;          /* Azul acento */
+  --success: #00FFD0;         /* Cian para éxito */
+  --error: #ff5f56;           /* Rojo para errores */
+}
+
 .app {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1f2d 0%, #11141f 100%);
+  background: linear-gradient(135deg, var(--dark) 0%, #0a0f1a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
   font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
 }
 
-/* Terminal Container - Ahora ocupa toda la pantalla disponible */
+/* Terminal Container - Ahora con bordes y sombra */
 .terminal-container {
-  width: 100%;
-  height: 100vh;
-  max-height: 100vh;
-  background-color: #1e2430;
-  border-radius: 0;
+  width: 90%;
+  max-width: 1200px;
+  height: 85vh;
+  min-height: 500px;
+  background-color: rgba(4, 8, 15, 0.95);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: none;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 255, 208, 0.15);
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 208, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-/* Terminal Header */
+/* Efecto al pasar el mouse para resaltar la ventana */
+.terminal-container:hover {
+  box-shadow: 
+    0 30px 60px -12px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(0, 255, 208, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Terminal Header con mejor aspecto */
 .terminal-header {
-  background-color: #2a3041;
+  background: linear-gradient(to bottom, #0c111d, #080c15);
   padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #343c51;
+  border-bottom: 1px solid rgba(0, 255, 208, 0.2);
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Efecto de luz en el header */
+.terminal-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+  opacity: 0.3;
 }
 
 .terminal-buttons {
@@ -41,73 +78,182 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .terminal-button.close {
   background-color: #ff5f56;
 }
 
+.terminal-button.close:hover {
+  background-color: #ff3b30;
+}
+
 .terminal-button.minimize {
   background-color: #ffbd2e;
 }
 
+.terminal-button.minimize:hover {
+  background-color: #ffa500;
+}
+
 .terminal-button.maximize {
-  background-color: #27c93f;
+  background-color: var(--primary);
+  opacity: 0.7;
+}
+
+.terminal-button.maximize:hover {
+  background-color: var(--primary);
+  opacity: 1;
 }
 
 .terminal-title {
   margin-left: 0.5rem;
-  color: #8f9bb3;
+  color: var(--primary);
   font-size: 0.875rem;
+  flex: 1;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(0, 255, 208, 0.4);
+  letter-spacing: 0.5px;
 }
 
 /* Terminal Content - Ahora es flexible */
 .terminal-content {
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   overflow: hidden;
-  min-height: 0; /* Necesario para que flex-grow funcione correctamente */
+  min-height: 0;
+  background-color: rgba(4, 8, 15, 0.8);
 }
 
 .terminal-output {
   flex-grow: 1;
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 1rem;
+  background: 
+    /* Base con gradiente angular */
+    linear-gradient(135deg, rgba(4, 8, 15, 0.98) 0%, rgba(8, 16, 32, 0.95) 100%),
+    /* Efecto de rejilla técnica */
+    linear-gradient(rgba(0, 255, 208, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 208, 0.02) 1px, transparent 1px),
+    /* Puntos de conexión */
+    radial-gradient(circle, rgba(0, 255, 208, 0.1) 1px, transparent 2px);
+  
+  background-size: 
+    100% 100%,
+    30px 30px,
+    30px 30px,
+    60px 60px;
+  
+  padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 1rem;
   font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-  line-height: 1.5;
+  line-height: 1.6;
+  border: 1px solid rgba(0, 255, 208, 0.25);
+  box-shadow: 
+    inset 0 0 30px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 255, 208, 0.15);
+  color: var(--secondary);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Efecto de borde neón */
+.terminal-output::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  padding: 2px;
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(0, 255, 208, 0.1) 50%, 
+    transparent 100%);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.terminal-output {
+  flex-grow: 1;
+  overflow-y: auto;
+  background: 
+    /* Color base */
+    rgba(4, 8, 15, 0.96),
+    /* Patrón de código binario sutil */
+    linear-gradient(rgba(0, 255, 208, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 208, 0.03) 1px, transparent 1px),
+    /* Efecto de profundidad */
+    radial-gradient(circle at 20% 30%, rgba(0, 255, 208, 0.05) 0%, transparent 40%);
+  
+  background-size: 
+    100% 100%,
+    20px 20px,
+    20px 20px,
+    100% 100%;
+  
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  line-height: 1.6;
+  border: 1px solid rgba(0, 255, 208, 0.2);
+  box-shadow: 
+    inset 0 2px 20px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(0, 255, 208, 0.1);
+  color: var(--secondary);
+  position: relative;
+}
+
+/* Mejorar contraste del texto */
+.terminal-output * {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
 /* Terminal Input */
 .terminal-input-container {
   display: flex;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 0.5rem 1rem;
+  background-color: rgba(4, 8, 15, 0.6);
+  padding: 0.75rem 1rem;
   border-radius: 8px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   flex-shrink: 0;
+  border: 1px solid rgba(0, 255, 208, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .terminal-prompt {
-  color: #5eff5a;
-  margin-right: 0.5rem;
+  color: var(--primary);
+  margin-right: 0.75rem;
   font-weight: bold;
   font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  text-shadow: 0 0 5px rgba(0, 255, 208, 0.4);
 }
 
 .terminal-input {
   flex-grow: 1;
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: var(--secondary);
   font-family: inherit;
   font-size: clamp(0.8rem, 1.5vw, 0.9rem);
   outline: none;
+  caret-color: var(--primary);
+}
+
+.terminal-input::placeholder {
+  color: rgba(252, 244, 238, 0.4);
 }
 
 /* Terminal Help */
@@ -116,76 +262,118 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   font-size: clamp(0.7rem, 1.5vw, 0.75rem);
-  color: #8f9bb3;
+  color: var(--tertiary);
   flex-shrink: 0;
+  padding: 0.5rem;
+  background-color: rgba(4, 8, 15, 0.4);
+  border-radius: 6px;
+  border: 1px solid rgba(0, 255, 208, 0.05);
 }
 
 .terminal-command-button {
   background: none;
   border: none;
-  color: #5e8aff;
+  color: var(--primary);
   cursor: pointer;
-  padding: 0;
+  padding: 0.25rem 0.5rem;
   font-family: inherit;
   font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 .terminal-command-button:hover {
+  background-color: rgba(0, 255, 208, 0.1);
   text-decoration: underline;
 }
 
 /* Projects View */
 .view-title {
-  color: #5e8aff;
-  margin-bottom: 1rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
   font-size: clamp(1rem, 2vw, 1.1rem);
   font-weight: bold;
+  text-shadow: 0 0 8px rgba(0, 255, 208, 0.4);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 255, 208, 0.2);
 }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 
 /* Project Card */
 .project-card {
-  background-color: #2a3041;
-  padding: 1rem;
-  border-radius: 8px;
-  transition: transform 0.2s;
+  background: linear-gradient(to bottom, rgba(12, 17, 29, 0.8), rgba(8, 12, 21, 0.8));
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(0, 255, 208, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 255, 208, 0.3);
+}
+
+.project-card:hover::before {
+  opacity: 1;
 }
 
 .project-title {
-  color: #5eff5a;
-  margin: 0 0 0.5rem 0;
-  font-size: clamp(0.9rem, 1.8vw, 1rem);
+  color: var(--primary);
+  margin: 0 0 1rem 0;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 255, 208, 0.3);
 }
 
 .project-description {
-  color: #c5cee0;
-  margin: 0 0 1rem 0;
-  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
-  line-height: 1.4;
+  color: var(--secondary);
+  margin: 0 0 1.5rem 0;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  line-height: 1.5;
   flex-grow: 1;
+  opacity: 0.9;
 }
 
 .project-technologies {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .technology-tag {
-  background-color: #3e4458;
-  color: #c5cee0;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  background: linear-gradient(to bottom, rgba(109, 114, 117, 0.3), rgba(84, 89, 93, 0.3));
+  color: var(--secondary);
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
   font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+  border: 1px solid rgba(0, 255, 208, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .project-links {
@@ -194,50 +382,78 @@
 }
 
 .project-link {
-  color: #5e8aff;
+  color: var(--primary);
   text-decoration: none;
   font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: rgba(0, 255, 208, 0.1);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 255, 208, 0.2);
 }
 
 .project-link:hover {
-  text-decoration: underline;
+  background-color: rgba(0, 255, 208, 0.2);
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 255, 208, 0.2);
 }
 
 /* Scrollbar personalizado */
 .terminal-output::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 .terminal-output::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  background: rgba(4, 8, 15, 0.3);
+  border-radius: 5px;
 }
 
 .terminal-output::-webkit-scrollbar-thumb {
-  background: #5e8aff;
-  border-radius: 4px;
+  background: rgba(0, 255, 208, 0.3);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 .terminal-output::-webkit-scrollbar-thumb:hover {
-  background: #4a7aff;
+  background: rgba(0, 255, 208, 0.5);
 }
 
 /* Media Queries para ajustes específicos */
+@media (max-width: 1024px) {
+  .app {
+    padding: 1.5rem;
+  }
+  
+  .terminal-container {
+    width: 95%;
+    height: 80vh;
+  }
+}
+
 @media (max-width: 768px) {
   .app {
-    padding: 0;
+    padding: 1rem;
+  }
+  
+  .terminal-container {
+    width: 100%;
+    height: 90vh;
+    border-radius: 0;
   }
   
   .terminal-content {
-    padding: 0.75rem;
+    padding: 1rem;
   }
   
   .terminal-output {
-    padding: 0.75rem;
+    padding: 1rem;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .project-technologies {
@@ -256,16 +472,16 @@
   }
   
   .terminal-content {
-    padding: 0.5rem;
+    padding: 0.75rem;
   }
   
   .terminal-output {
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
   }
   
   .terminal-input-container {
-    padding: 0.4rem 0.75rem;
+    padding: 0.5rem;
   }
   
   .terminal-help {
@@ -273,40 +489,57 @@
   }
   
   .project-card {
-    padding: 0.75rem;
+    padding: 1rem;
   }
 }
 
 /* Para pantallas muy grandes */
 @media (min-width: 1920px) {
   .terminal-container {
-    max-width: 1800px;
-    margin: 0 auto;
-    height: 95vh;
-    margin-top: 2.5vh;
-    border-radius: 12px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    max-width: 1400px;
+    height: 80vh;
+    margin: 5vh auto;
+    border-radius: 16px;
   }
   
   .projects-grid {
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  }
-}
-
-/* Ajustes para modo retrato en móviles */
-@media (max-height: 700px) and (max-width: 768px) {
-  .terminal-help {
-    display: none;
-  }
-  
-  .terminal-input-container {
-    margin-bottom: 0.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 }
 
 /* Mejoras de accesibilidad */
 @media (prefers-reduced-motion: reduce) {
-  .project-card {
+  .terminal-container,
+  .project-card,
+  .terminal-command-button,
+  .project-link {
     transition: none;
   }
+  
+  .terminal-container:hover {
+    transform: none;
+  }
+}
+
+/* Restaurar botón */
+.restore-terminal-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: rgba(4, 8, 15, 0.9);
+  color: var(--primary);
+  border: 1px solid rgba(0, 255, 208, 0.3);
+  border-radius: 5px;
+  font-family: 'Fira Code', monospace;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(5px);
+}
+
+.restore-terminal-btn:hover {
+  background: rgba(0, 255, 208, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 10px rgba(0, 255, 208, 0.2);
 }

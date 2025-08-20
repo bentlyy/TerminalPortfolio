@@ -7,17 +7,20 @@ interface Props {
 }
 
 export default function TerminalLine({ text, type }: Props) {
-  const colors: Record<LineType, string> = {
-    command: "text-green-400",
-    output: "text-gray-300",
-    error: "text-red-400",
-    info: "text-blue-400",
-    success: "text-green-300"
+  const getClassName = () => {
+    switch (type) {
+      case 'command': return 'text-command';
+      case 'output': return 'text-output';
+      case 'info': return 'text-info';
+      case 'error': return 'text-error';
+      case 'success': return 'text-success';
+      default: return 'text-output';
+    }
   };
 
   return (
     <motion.div 
-      className={`${colors[type]} whitespace-pre-wrap font-mono text-sm`}
+      className={`terminal-line ${getClassName()}`}
       initial={{ opacity: 0, y: 5 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
