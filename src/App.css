@@ -211,7 +211,8 @@
     inset 0 2px 20px rgba(0, 0, 0, 0.4),
     0 0 15px rgba(0, 255, 208, 0.1);
   color: var(--secondary);
-  position: relative;
+  position: relative; /* Añadir esto para posicionamiento absoluto del auto */
+  min-height: 200px; /* Asegurar altura mínima */
 }
 
 /* Mejorar contraste del texto */
@@ -220,8 +221,61 @@
   z-index: 2;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
+
+/* Terminal Suggestions - Posicionamiento mejorado */
+.terminal-suggestions {
+  position: absolute;
+  bottom: calc(100% + 5px); /* Aparece justo encima del input */
+  left: 1.5rem; /* Mismo padding que el contenedor del input */
+  width: calc(100% - 3rem); /* Mismo ancho que el contenedor del input */
+  background: rgba(4, 8, 15, 0.98);
+  border: 1px solid rgba(0, 255, 208, 0.3);
+  border-radius: 8px 8px 0 0; /* Bordes redondeados solo arriba */
+  overflow: hidden;
+  box-shadow: 
+    0 -8px 20px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(0, 255, 208, 0.1);
+  font-family: 'Fira Code', monospace;
+  z-index: 150;
+  backdrop-filter: blur(10px);
+  animation: slideInDown 0.2s ease-out;
+  border-bottom: none;
+}
+
+/* Nueva animación que desliza desde arriba */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: var(--secondary);
+  font-size: 0.85rem;
+  transition: background 0.2s ease, color 0.2s ease;
+  border-bottom: 1px solid rgba(0, 255, 208, 0.05);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+/* Efecto hover tipo neón */
+.suggestion-item:hover {
+  background: rgba(0, 255, 208, 0.1);
+  color: var(--primary);
+  text-shadow: 0 0 8px rgba(0, 255, 208, 0.5);
+}
 /* Terminal Input */
 .terminal-input-container {
+  position: relative;
   display: flex;
   align-items: center;
   background-color: rgba(4, 8, 15, 0.6);

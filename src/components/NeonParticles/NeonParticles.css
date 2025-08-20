@@ -1,0 +1,18 @@
+.neon-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.neon-particle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--primary);
+  box-shadow: 
+    0 0 5px var(--primary),
+    0 0 10px var(--primary);
+}
