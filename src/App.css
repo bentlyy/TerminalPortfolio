@@ -1,0 +1,312 @@
+/* App.css - Versión mejorada para responsividad */
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1f2d 0%, #11141f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
+/* Terminal Container - Ahora ocupa toda la pantalla disponible */
+.terminal-container {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: #1e2430;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Terminal Header */
+.terminal-header {
+  background-color: #2a3041;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #343c51;
+  flex-shrink: 0;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-button.close {
+  background-color: #ff5f56;
+}
+
+.terminal-button.minimize {
+  background-color: #ffbd2e;
+}
+
+.terminal-button.maximize {
+  background-color: #27c93f;
+}
+
+.terminal-title {
+  margin-left: 0.5rem;
+  color: #8f9bb3;
+  font-size: 0.875rem;
+}
+
+/* Terminal Content - Ahora es flexible */
+.terminal-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  min-height: 0; /* Necesario para que flex-grow funcione correctamente */
+}
+
+.terminal-output {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  line-height: 1.5;
+}
+
+/* Terminal Input */
+.terminal-input-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.terminal-prompt {
+  color: #5eff5a;
+  margin-right: 0.5rem;
+  font-weight: bold;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+}
+
+.terminal-input {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  outline: none;
+}
+
+/* Terminal Help */
+.terminal-help {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+  color: #8f9bb3;
+  flex-shrink: 0;
+}
+
+.terminal-command-button {
+  background: none;
+  border: none;
+  color: #5e8aff;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+}
+
+.terminal-command-button:hover {
+  text-decoration: underline;
+}
+
+/* Projects View */
+.view-title {
+  color: #5e8aff;
+  margin-bottom: 1rem;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-weight: bold;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Project Card */
+.project-card {
+  background-color: #2a3041;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-title {
+  color: #5eff5a;
+  margin: 0 0 0.5rem 0;
+  font-size: clamp(0.9rem, 1.8vw, 1rem);
+}
+
+.project-description {
+  color: #c5cee0;
+  margin: 0 0 1rem 0;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.technology-tag {
+  background-color: #3e4458;
+  color: #c5cee0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.project-link {
+  color: #5e8aff;
+  text-decoration: none;
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+/* Scrollbar personalizado */
+.terminal-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+  background: #5e8aff;
+  border-radius: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover {
+  background: #4a7aff;
+}
+
+/* Media Queries para ajustes específicos */
+@media (max-width: 768px) {
+  .app {
+    padding: 0;
+  }
+  
+  .terminal-content {
+    padding: 0.75rem;
+  }
+  
+  .terminal-output {
+    padding: 0.75rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-technologies {
+    gap: 0.25rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-header {
+    padding: 0.5rem;
+  }
+  
+  .terminal-content {
+    padding: 0.5rem;
+  }
+  
+  .terminal-output {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .terminal-input-container {
+    padding: 0.4rem 0.75rem;
+  }
+  
+  .terminal-help {
+    gap: 0.25rem;
+  }
+  
+  .project-card {
+    padding: 0.75rem;
+  }
+}
+
+/* Para pantallas muy grandes */
+@media (min-width: 1920px) {
+  .terminal-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    height: 95vh;
+    margin-top: 2.5vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+/* Ajustes para modo retrato en móviles */
+@media (max-height: 700px) and (max-width: 768px) {
+  .terminal-help {
+    display: none;
+  }
+  
+  .terminal-input-container {
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    transition: none;
+  }
+}
